@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx 小練習</title>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="test"></div>
+    <div id="demo"></div>
+
+    <!-- 按照順序引入 核心庫要先於擴展庫 -->
+    <!-- 引入 react 核心庫 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入 react-dom 用於支援 react 操作 dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入 babel 用於將 jsx 轉為 js -->
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 一定要寫 type="text/babel" -->
+    <script type="text/babel">
+        // 模擬一些數據
+        const data = ['Angular', 'React', 'Vue']
+        // 1 創建虛擬 DOM
+        const VDOM = (
+            <div>
+                <h1>前端 js 框架列表</h1>
+                <ul>
+                    {
+                        data.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })
+                        // 這樣放 index 事實上不合理
+                    }
+                </ul>
+            </div >
+        )
+        // 2 渲染虛擬 DOM 到頁面
+        ReactDOM.render(VDOM, document.getElementById('test'))
+
+        /*
+        一定注意區分
+        1 js 表達式
+          一個表達式會產生一個值，可以放在任何一個需要值的地方
+          下面這些都是表達式
+          (1) a
+          (2) a+b
+          (3) demo(1)
+          (4) arr.map()
+          (5) function test() {}
+        2 js 語句(代碼)
+          下面這些都是代碼
+          (1) if(){}
+          (2) for(){}
+          (3) switch(){case:xxxx}
+        */
+    </script>
+</body>
+
+</html>

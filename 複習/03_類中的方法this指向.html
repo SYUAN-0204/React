@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03 類中的方法this指向</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+            speak() {
+                // speak 方法放在了哪裡？–類的原型對象上，供實例使用
+                // 通過 Person 實例調用 speak 時， speak 中的 this 就是 Person 實例
+                console.log(this)
+            }
+        }
+
+        const p1 = new Person('Tom', 18)
+        p1.speak() // 通過實例調用 speak 方法
+        const x = p1.study
+        x()
+    </script>
+</body>
+
+</html>
