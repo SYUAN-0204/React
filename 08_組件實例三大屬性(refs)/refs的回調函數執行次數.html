@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>refs 的回調函數形式</title>
+    <title>refs 的回調函數執行次數</title>
 </head>
 
 <body>
@@ -24,22 +24,35 @@
     <script type="text/babel">
         // 創建組件
         class Demo extends React.Component {
-            // 展示左側輸入框的數據
-            showData = () => {
+
+            state = { isHot: false }
+
+            // 展示輸入框的數據
+            showInfo = () => {
                 const { input1 } = this
                 alert(input1.value)
             }
-            // 展示右側輸入框的數據
-            showData2 = () => {
-                const { input2 } = this
-                alert(input2.value)
+
+            // 改變天氣
+            changeWeather = () => {
+                const { isHot } = this.state
+                this.setState({ isHot: !isHot })
+            }
+
+            //
+            saveInput = (c) => {
+                this.input1 = c
+                console.log('@', c)
             }
             render() {
+                const { isHot } = this.state
                 return (
                     <div>
-                        <input ref={(currentNode) => { this.input1 = currentNode }} type="text" placeholder="點擊按鈕提示數據" />&nbsp;
-                        <button ref="button1" onClick={this.showData}>點我提示左側的數據</button>&nbsp;
-                        <input ref={c => this.input2 = c} onBlur={this.showData2} type="text" placeholder="失去焦點提示數據" />
+                        <h2>今天天氣很{isHot ? '炎熱' : '涼爽'}</h2>
+                        {/*<input ref={(c) => { this.input1 = c; console.log('@', c) }} type="text" placeholder="點擊按鈕提示數據" />&nbsp;*/}
+                        <input ref={this.saveInput} type="text" placeholder="點擊按鈕提示數據" />&nbsp;
+                        <button ref="button1" onClick={this.showInfo}>點我提示輸入的數據</button>&nbsp;
+                        <button onClick={this.changeWeather}>點我切換天氣</button>
                     </div>
                 )
             }
