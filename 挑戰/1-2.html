@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <!-- 準備好一個容器 -->
+    <div id="test"></div>
+
+    <!-- 按照順序引入 核心庫要先於擴展庫 -->
+    <!-- 引入 react 核心庫 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入 react-dom 用於支援 react 操作 dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入 babel 用於將 jsx 轉為 js -->
+    <script src="../js/babel.min.js"></script>
+
+    <!-- 一定要寫 type="text/babel" -->
+    <script type="text/babel">
+
+        class Display extends React.Component {
+            render() {
+                const { count } = this.props
+                return (
+                    <span>{count}</span>
+                )
+            }
+        }
+
+        class Calculator extends React.Component {
+            state = { count: 0 }
+
+            minusNumber = () => {
+                const count = this.state.count
+                this.setState({ count: count - 1 })
+            }
+
+            plusNumber = () => {
+                const count = this.state.count
+                this.setState({ count: count + 1 })
+            }
+
+            render() {
+                const { count } = this.state
+                return (
+                    <div>
+                        <button onClick={this.minusNumber}>-</button>&nbsp;
+                        <Display count={count} />&nbsp;
+                        <button onClick={this.plusNumber}>+</button>
+                    </div >
+                )
+            }
+        }
+
+        ReactDOM.render(<Calculator />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
